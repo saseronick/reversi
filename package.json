@@ -1,0 +1,27 @@
+{
+  "name": "reversi",
+  "version": "1.0.0",
+  "description": "This is the ancient game of Reversi",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saseronick/reversi.git"
+  },
+  "keywords": [
+    "reversi",
+    "othello"
+  ],
+  "author": "Stacey A. Seronick",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/saseronick/reversi/issues"
+  },
+  "homepage": "https://github.com/saseronick/reversi#readme",
+  "dependencies": {
+    "node-static": "^0.7.9",
+    "socket.io": "^2.0.1"
+  }
+}
