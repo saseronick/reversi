@@ -8,8 +8,8 @@ var http = require('http');
 var port = process.env.PORT;
 var directory = __dirname + '/public';
 
-/* If we aren't on Heroku, then we need to adjust the port and directory conformation and we klnow that because port won't be set */
-if (typeof port == 'undefined' || !port){
+/* If we aren't on Heroku, then we need to adjust the port and directory conformation and we know that because port won't be set */
+if(typeof port == 'undefined' || !port){
   directory = './public';
   port = 8080;  
   
@@ -19,7 +19,7 @@ if (typeof port == 'undefined' || !port){
   /* Construct an http server that gets files form the file server */
   var app = http.createServer(
     function(request,response){
-      request.addListener ('end',
+      request.addListener('end',
         function(){
           file.serve(request,response);
           }
