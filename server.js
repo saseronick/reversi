@@ -21,7 +21,7 @@ if (typeof port == 'undefined' || !port){
     function(request,response){
       request.addListener ('end',
         function(){
-          file.server(request,response);
+          file.serve(request,response);
           }
        ).resume();
     }
