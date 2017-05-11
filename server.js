@@ -9,9 +9,10 @@ var port = process.env.PORT;
 var directory = __dirname + '/public';
 
 /* If we aren't on Heroku, then we need to adjust the port and directory conformation and we know that because port won't be set */
-if(typeof port == 'undefined' || !port){
+if (typeof port == 'undefined' || !port){
   directory = './public';
   port = 8080;  
+}
   
   /* Set up a static web server which wil deliver files from the filesystem */
   var file = new static.Server(directory);
