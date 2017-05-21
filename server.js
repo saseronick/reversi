@@ -135,14 +135,14 @@ if (typeof port == 'undefined' || !port){
 /* payload:
     {
       'room' : room to join,
-      'username' : username of person joining
+      'username' : username of person sending the message,
+      'message' : the message to send
     }
-    join_room_response:
+    send_message_response:
     {
       'result' : 'success',
-      'room' : room joined,
       'username' : username that joined,
-      'membership' : number of people in the room including the new one
+      'message' : the message spoken
     }
     or
     {
