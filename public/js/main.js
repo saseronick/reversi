@@ -170,7 +170,7 @@ function makeInviteButton(socket_id){
 	var newNode = $(newHTML);
 	newNode.click(function(){
 		invite(socket_id);
-	})
+	});
 	return(newNode);
 }
 
