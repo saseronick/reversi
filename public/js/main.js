@@ -74,12 +74,12 @@ socket.on('join_room_response',function(payload){
 		nodeB.slideDown(1000);
 		nodeC.slideDown(1000);
 }
-/* If we have seen the person who just joined (something weird happens) */
+/* If we have seen the person who just joined (something weird happens) 
 else{
 	var buttonC = makeInviteButton(payload.socket_id);
 	$('.socket_'+payload.socket_id+' button').replaceWith(buttonC);
 	dom_elements.slideDown(1000);
-}
+}*/
 
 /* Manage the message that a new player has joined */
 var newHTML = '<p>'+payload.username+' just entered the lobby</p>';
