@@ -275,3 +275,76 @@ $(function(){
 	console.log('*** Client Log Message: \'join_room\' payload: '+JSON.stringify(payload));
 	socket.emit('join_room',payload);
 });
+
+var old_board = [
+	['?','?','?','?','?','?','?','?'],
+	['?','?','?','?','?','?','?','?'],
+	['?','?','?','?','?','?','?','?'],
+	['?','?','?','?','?','?','?','?'],
+	['?','?','?','?','?','?','?','?'],
+	['?','?','?','?','?','?','?','?'],
+	['?','?','?','?','?','?','?','?'],
+	['?','?','?','?','?','?','?','?']
+];
+
+socket.on('game_update',function(payload){
+	console.log('*** Client Log Message: \'game_update\'\n\tpayload: '+JSON.stringify(payload));
+	/* Check for a good board update */
+		if(payload.result == 'fail'){
+			console.log(payload.message);
+			window.location.href = 'lobby.html?username='+username;
+			return;
+	}
+
+	/* Check for a good board in the payload */
+	var board = payload.game.board;
+	if('undefined' == typeof board || !board){
+		console.log('Internal error: received a malformed board update from the server');
+		return;
+	}
+
+	/* Update my color */
+
+  /* Animate changes to the board */
+  var row,column;
+  for(row = 0; row < 8; row++){
+	  for(column = 0; column < 8; column++){
+        /* If a board space has changed */
+		if(old_board[row][column] != board [row][column]){
+			if(old_board[row][column] == '?' && board[row][column] == ' '){
+				$('#'+row+'_'+column).html('<img src="assets/images/Blank.gif" alt="empty square"/>');
+			}
+		    else if(old_board[row][column] == '?' && board[row][column] == 'w'){
+				$('#'+row+'_'+column).html('<img src="assets/images/BlankToMonster.gif" alt="Monster (white) square"/>');
+			}
+			else if(old_board[row][column] == '?' && board[row][column] == 'b'){
+				$('#'+row+'_'+column).html('<img src="assets/images/BlankToCookie.gif" alt="Cookie (black) square"/>');
+			}
+			else if(old_board[row][column] == ' ' && board[row][column] == 'w'){
+				$('#'+row+'_'+column).html('<img src="assets/images/BlankToMonster.gif" alt="Monster (white) square"/>');
+			}
+			else if(old_board[row][column] == ' ' && board[row][column] == 'b'){
+				$('#'+row+'_'+column).html('<img src="assets/images/BlankToCookie.gif" alt="Cookie (black) square"/>');
+			}
+			else if(old_board[row][column] == 'w' && board[row][column] == ' '){
+				$('#'+row+'_'+column).html('<img src="assets/images/MonsterToBlank.gif" alt="empty square"/>');
+			}
+			else if(old_board[row][column] == 'b' && board[row][column] == ' '){
+				$('#'+row+'_'+column).html('<img src="assets/images/CookieToBlank.gif" alt="empty square"/>');
+			}
+			else if(old_board[row][column] == 'w' && board[row][column] == 'b'){
+				$('#'+row+'_'+column).html('<img src="assets/images/MonsterToCookie.gif" alt="Cookie (black) square"/>');
+			}
+			else if(old_board[row][column] == 'b' && board[row][column] == 'w'){
+				$('#'+row+'_'+column).html('<img src="assets/images/CookieToMonster.gif" alt="Monster (white) square"/>');
+			}
+			else{
+				$('#'+row+'_'+column).html('<img src="assets/images/Error.gif" alt="Error"/>');
+			
+			}
+		}
+	  }
+  }
+
+old_board = board;
+});
