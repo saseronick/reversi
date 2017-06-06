@@ -85,7 +85,7 @@ socket.on('join_room_response',function(payload){
 	}
 
 	/* Manage the message that a new player has joined */
-	var newHTML = '<p>'+payload.username+' just entered the lobby</p>';
+	var newHTML = '<p>'+payload.username+' just entered the room</p>';
 	var newNode = $(newHTML);
 	newNode.hide();
 	$('#messages').prepend(newNode);
@@ -325,6 +325,7 @@ socket.on('game_update',function(payload){
 		}
 
 	$('#my_color').html('<h3 id="my_color">I am '+my_color+'</h3>');
+	$('#my_color').append('<h4>It is '+payload.game.whose_turn+'\'s turn</h4>');
 
   /* Animate changes to the board */
 
