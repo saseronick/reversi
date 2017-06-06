@@ -366,10 +366,10 @@ var whitesum = 0;
 				$('#'+row+'_'+column).html('<img src="assets/images/CookieToBlank.gif" alt="empty square"/>');
 			}
 			else if(old_board[row][column] == 'w' && board[row][column] == 'b'){
-				$('#'+row+'_'+column).html('<img src="assets/images/MonsterToCookie.gif" alt="Cookie (black) square"/>');
+				$('#'+row+'_'+column).html('<img src="assets/images/MonsterToCookie_Once.gif" alt="Cookie (black) square"/>');
 			}
 			else if(old_board[row][column] == 'b' && board[row][column] == 'w'){
-				$('#'+row+'_'+column).html('<img src="assets/images/CookieToMonster.gif" alt="Monster (white) square"/>');
+				$('#'+row+'_'+column).html('<img src="assets/images/CookieToMonster_Once.gif" alt="Monster (white) square"/>');
 			}
 			else{
 				$('#'+row+'_'+column).html('<img src="assets/images/Error.gif" alt="Error"/>');
