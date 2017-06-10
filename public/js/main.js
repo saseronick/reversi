@@ -312,11 +312,11 @@ socket.on('game_update',function(payload){
 	}
 
 	/* Update my color */
-	if(socket.id == payload.game.player_white.socket){
-		my_color = 'white';
+	if(socket.id == payload.game.player_monster.socket){
+		my_color = 'monster';
 	}
-	else if(socket.id == payload.game.player_black.socket){
-		my_color = 'black';
+	else if(socket.id == payload.game.player_cookie.socket){
+		my_color = 'cookie';
 		}
 		else{
 			/* Something weird is going on, like three people playing at once */
@@ -325,7 +325,7 @@ socket.on('game_update',function(payload){
 			return;
 		}
 
-	$('#my_color').html('<h3 id="my_color">I am '+my_color+'</h3><h5>Black = Cookie<br>White = Cookie Monster</h5>');
+	$('#my_color').html('<h3 id="my_color">I am '+my_color+'</h3>');
 	$('#my_color').append('<h4>It is '+payload.game.whose_turn+'\'s turn. Elapsed time <span id="elapsed"></span></h4>');
 
     clearInterval(interval_timer)
@@ -348,17 +348,17 @@ socket.on('game_update',function(payload){
 
   /* Animate changes to the board */
 
-var blacksum = 0;
-var whitesum = 0;
+var cookiesum = 0;
+var monstersum = 0;
 
   var row,column;
   for(row = 0; row < 8; row++){
 	  for(column = 0; column < 8; column++){
-		  if(board[row][column] == 'b'){
-			  blacksum++;
+		  if(board[row][column] == 'c'){
+			  cookiesum++;
 		  }
-		  if(board[row][column] == 'w'){
-			  whitesum++;
+		  if(board[row][column] == 'm'){
+			  monstersum++;
 		  }
 
         /* If a board space has changed */
@@ -366,29 +366,29 @@ var whitesum = 0;
 			if(old_board[row][column] == '?' && board[row][column] == ' '){
 				$('#'+row+'_'+column).html('<img src="assets/images/Blank.gif" alt="empty square"/>');
 			}
-		    else if(old_board[row][column] == '?' && board[row][column] == 'w'){
-				$('#'+row+'_'+column).html('<img src="assets/images/BlankToMonster.gif" alt="Monster (white) square"/>');
+		    else if(old_board[row][column] == '?' && board[row][column] == 'm'){
+				$('#'+row+'_'+column).html('<img src="assets/images/BlankToMonster.gif" alt="Monster square"/>');
 			}
-			else if(old_board[row][column] == '?' && board[row][column] == 'b'){
-				$('#'+row+'_'+column).html('<img src="assets/images/BlankToCookie.gif" alt="Cookie (black) square"/>');
+			else if(old_board[row][column] == '?' && board[row][column] == 'c'){
+				$('#'+row+'_'+column).html('<img src="assets/images/BlankToCookie.gif" alt="Cookie square"/>');
 			}
-			else if(old_board[row][column] == ' ' && board[row][column] == 'w'){
-				$('#'+row+'_'+column).html('<img src="assets/images/BlankToMonster.gif" alt="Monster (white) square"/>');
+			else if(old_board[row][column] == ' ' && board[row][column] == 'm'){
+				$('#'+row+'_'+column).html('<img src="assets/images/BlankToMonster.gif" alt="Monster square"/>');
 			}
-			else if(old_board[row][column] == ' ' && board[row][column] == 'b'){
-				$('#'+row+'_'+column).html('<img src="assets/images/BlankToCookie.gif" alt="Cookie (black) square"/>');
+			else if(old_board[row][column] == ' ' && board[row][column] == 'c'){
+				$('#'+row+'_'+column).html('<img src="assets/images/BlankToCookie.gif" alt="Cookie square"/>');
 			}
-			else if(old_board[row][column] == 'w' && board[row][column] == ' '){
+			else if(old_board[row][column] == 'm' && board[row][column] == ' '){
 				$('#'+row+'_'+column).html('<img src="assets/images/MonsterToBlank.gif" alt="empty square"/>');
 			}
-			else if(old_board[row][column] == 'b' && board[row][column] == ' '){
+			else if(old_board[row][column] == 'c' && board[row][column] == ' '){
 				$('#'+row+'_'+column).html('<img src="assets/images/CookieToBlank.gif" alt="empty square"/>');
 			}
-			else if(old_board[row][column] == 'w' && board[row][column] == 'b'){
-				$('#'+row+'_'+column).html('<img src="assets/images/MonsterToCookie_Once.gif" alt="Cookie (black) square"/>');
+			else if(old_board[row][column] == 'm' && board[row][column] == 'c'){
+				$('#'+row+'_'+column).html('<img src="assets/images/MonsterToCookie_Once.gif" alt="Cookie square"/>');
 			}
-			else if(old_board[row][column] == 'b' && board[row][column] == 'w'){
-				$('#'+row+'_'+column).html('<img src="assets/images/CookieToMonster_Once.gif" alt="Monster (white) square"/>');
+			else if(old_board[row][column] == 'c' && board[row][column] == 'm'){
+				$('#'+row+'_'+column).html('<img src="assets/images/CookieToMonster_Once.gif" alt="Monster square"/>');
 			}
 			else{
 				$('#'+row+'_'+column).html('<img src="assets/images/Error.gif" alt="Error"/>');
@@ -417,8 +417,8 @@ if(payload.game.whose_turn === my_color){
 		}
 	  }
   }
-$('#blacksum').html(blacksum);
-$('#whitesum').html(whitesum);
+$('#cookiesum').html(cookiesum);
+$('#monstersum').html(monstersum);
 
 old_board = board;
 });
